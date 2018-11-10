@@ -46,6 +46,7 @@ class BooksApp extends React.Component {
           />
           :
           <ListBooks
+            books={this.state.books}
             toggleScreen={() => {
               this.setState(() => ({
                 showSearchPage: true
