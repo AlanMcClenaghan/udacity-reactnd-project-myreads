@@ -1,9 +1,11 @@
 import React from 'react'
 import ListBooksTitle from './ListBooksTitle'
+import OpenSearch from './OpenSearch'
 
 // Step 2 - Create components that need data.
 // Step 3 - Pass data from components that have it to components that need it.
 // Extracted list-book-title div into a stateless functional component.
+// Extracted open-search div into a stateless functional component.
 
 const ListBooks = (props) => (
   <div className="list-books">
@@ -159,9 +161,9 @@ const ListBooks = (props) => (
         </div>
       </div>
     </div>
-    <div className="open-search">
-      <a onClick={props.toggleScreen}>Add a book</a>
-    </div>
+    <OpenSearch
+      toggleScreen={props.toggleScreen}
+    />
   </div>
 )
 
