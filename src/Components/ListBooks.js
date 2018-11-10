@@ -1,14 +1,13 @@
 import React from 'react'
+import ListBooksTitle from './ListBooksTitle'
 
 // Step 2 - Create components that need data.
 // Step 3 - Pass data from components that have it to components that need it.
+// Extracted list-book-title div into a stateless functional component.
 
 const ListBooks = (props) => (
   <div className="list-books">
-    {console.log(props.books)}
-    <div className="list-books-title">
-      <h1>MyReads</h1>
-    </div>
+    <ListBooksTitle />
     <div className="list-books-content">
       <div>
         <div className="bookshelf">
