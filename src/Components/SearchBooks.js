@@ -1,41 +1,48 @@
 import React, { Component } from 'react'
 import * as BooksAPI from '../BooksAPI'
+import { debounce } from 'throttle-debounce';
 
 // Step 1 - Create components that hold data.
+// Added BooksGrid component to SearchBooks component,
+// and debugged search functionality
+
+import BooksGrid from './BooksGrid'
 
 class SearchBooks extends Component {
   state = {
     query: '',
-    booksFound: []
+    booksFound: [],
   }
 
   // Created Lifecycle Event to Search for books in the API
   componentDidMount() {
-    this.performSearch()
+    this.performSearch = debounce(1000, this.performSearch);
   }
 
   updateQuery = (query) => {
     this.setState(() => ({
-      query: query.trim()
+      query: query,
     }))
     this.performSearch(query)
   }
 
   performSearch = (query) => {
     BooksAPI.search(query)
-      .then((booksFound) => {
-        this.setState(() => ({
-          booksFound: booksFound,
-        }))
+      .then(booksFound => {
+        if (query) {
+          this.setState({
+            booksFound,
+          })
+        } else {
+          this.setState({ booksFound: [] })
+        }
       })
   }
 
   render() {
 
-    console.log(this.state.booksFound)
-
     return (
-      <div className="search-books">
+      <div className="search-books" >
         <div className="search-books-bar">
           <a
             className="close-search"
@@ -43,31 +50,27 @@ class SearchBooks extends Component {
           >Close
           </a>
           <div className="search-books-input-wrapper">
-            {/*
-              NOTES: The search from BooksAPI is limited to a particular set of search terms.
-              You can find these search terms here:
-              https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md
-
-              However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
-              you don't find a specific author or title. Every search is limited by search terms.
-            */}
             <input
               type="text"
               placeholder="Search by title or author"
               value={this.state.query}
               onChange={(event) => this.updateQuery(event.target.value)}
             />
-
           </div>
         </div>
         <div className="search-books-results">
-          <ol className="books-grid">{JSON.stringify(this.state)}</ol>
+
+          {this.state.booksFound.length > 0 ?
+            <BooksGrid
+              books={this.state.booksFound}
+            />
+            :
+            <h1>Please type in a title or author </h1>
+          }
         </div>
       </div>
     )
-
   }
-
 }
 
 export default SearchBooks

@@ -4,7 +4,7 @@ const BooksGrid = (props) => {
 
   console.log(props)
   const books = props.books
-  console.log(books)
+  console.log(books.length)
 
   return (
     <ol className="books-grid">
