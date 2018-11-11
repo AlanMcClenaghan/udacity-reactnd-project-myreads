@@ -2,9 +2,8 @@ import React from 'react'
 
 const BooksGrid = (props) => {
 
-  console.log(props)
   const books = props.books
-  console.log(books.length)
+  const changeBookShelf = props.changeBookShelf
 
   return (
     <ol className="books-grid">
@@ -18,7 +17,10 @@ const BooksGrid = (props) => {
                   width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})`
                 }}></div>
               <div className="book-shelf-changer">
-                <select>
+                <select
+                  value={book.shelf ? book.shelf : book.shelf = 'move'}
+                  onChange={event => changeBookShelf(book, event.target.value)}
+                >
                   <option value="move" disabled>Move to...</option>
                   <option value="currentlyReading">Currently Reading</option>
                   <option value="wantToRead">Want to Read</option>

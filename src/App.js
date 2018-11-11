@@ -22,6 +22,11 @@ class BooksApp extends React.Component {
 
   // Created Lifecycle Event to load books from the API
   componentDidMount() {
+    this.getBooks();
+  }
+
+  // Moved function from Lifecycle Event so it can be reused
+  getBooks = () => {
     BooksAPI.getAll()
       .then((books) => {
         this.setState(() => ({
@@ -30,14 +35,26 @@ class BooksApp extends React.Component {
       })
   }
 
-  render() {
+  // Change shelf and remount the app
+  handleChangeBookShelf = (book, shelf) => {
+    BooksAPI.update(book, shelf)
+      .then(() => {
+        book.shelf = shelf
+        this.setState((prevState) => ({
+          book: prevState.books.filter(b => b.id !== book.id).concat([book])
+        }))
+        this.getBooks()
+      })
+  }
 
-    console.log(this.state.books)
+
+  render() {
 
     return (
       <div className="app">
         {this.state.showSearchPage ?
           <SearchBooks
+            changeBookShelf={this.handleChangeBookShelf}
             toggleScreen={() => {
               this.setState(() => ({
                 showSearchPage: false
@@ -47,6 +64,7 @@ class BooksApp extends React.Component {
           :
           <ListBooks
             books={this.state.books}
+            changeBookShelf={this.handleChangeBookShelf}
             toggleScreen={() => {
               this.setState(() => ({
                 showSearchPage: true

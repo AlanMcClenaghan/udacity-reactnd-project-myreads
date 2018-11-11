@@ -41,6 +41,9 @@ class SearchBooks extends Component {
 
   render() {
 
+    console.log(this.state.booksFound)
+    console.log(this.props)
+
     return (
       <div className="search-books" >
         <div className="search-books-bar">
@@ -63,6 +66,7 @@ class SearchBooks extends Component {
           {this.state.booksFound.length > 0 ?
             <BooksGrid
               books={this.state.booksFound}
+              changeBookShelf={this.props.changeBookShelf}
             />
             :
             <h1>Please type in a title or author </h1>

@@ -12,8 +12,6 @@ import BooksGrid from './BooksGrid'
 
 const ListBooks = (props) => {
 
-  console.log(props.books)
-
   return (
     < div className="list-books" >
       <ListBooksTitle />
@@ -24,6 +22,7 @@ const ListBooks = (props) => {
             <div className="bookshelf-books">
               <BooksGrid
                 books={props.books.filter(book => book.shelf === "currentlyReading")}
+                changeBookShelf={props.changeBookShelf}
               />
             </div>
           </div>
@@ -32,6 +31,7 @@ const ListBooks = (props) => {
             <div className="bookshelf-books">
               <BooksGrid
                 books={props.books.filter(book => book.shelf === "wantToRead")}
+                changeBookShelf={props.changeBookShelf}
               />
             </div>
           </div>
@@ -40,6 +40,7 @@ const ListBooks = (props) => {
             <div className="bookshelf-books">
               <BooksGrid
                 books={props.books.filter(book => book.shelf === "read")}
+                changeBookShelf={props.changeBookShelf}
               />
             </div>
           </div>
