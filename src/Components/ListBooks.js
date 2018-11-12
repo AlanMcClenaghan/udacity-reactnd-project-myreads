@@ -46,9 +46,7 @@ const ListBooks = (props) => {
           </div>
         </div>
       </div>
-      <OpenSearch
-        toggleScreen={props.toggleScreen}
-      />
+      <OpenSearch />
     </div >
   )
 

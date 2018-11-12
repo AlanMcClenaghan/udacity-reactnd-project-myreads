@@ -6,6 +6,9 @@ import { debounce } from 'throttle-debounce';
 // Added BooksGrid component to SearchBooks component,
 // and debugged search functionality
 
+// Step 6 - Add navigation.
+import { NavLink } from 'react-router-dom'
+
 import BooksGrid from './BooksGrid'
 
 class SearchBooks extends Component {
@@ -47,11 +50,12 @@ class SearchBooks extends Component {
     return (
       <div className="search-books" >
         <div className="search-books-bar">
-          <a
+          <NavLink
+            to="/"
             className="close-search"
-            onClick={this.props.toggleScreen}
+          // onClick={this.props.toggleScreen}
           >Close
-          </a>
+          </NavLink>
           <div className="search-books-input-wrapper">
             <input
               type="text"
