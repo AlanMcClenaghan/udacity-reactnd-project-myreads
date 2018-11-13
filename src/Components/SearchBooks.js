@@ -44,16 +44,12 @@ class SearchBooks extends Component {
 
   render() {
 
-    console.log(this.state.booksFound)
-    console.log(this.props)
-
     return (
       <div className="search-books" >
         <div className="search-books-bar">
           <NavLink
             to="/"
             className="close-search"
-          // onClick={this.props.toggleScreen}
           >Close
           </NavLink>
           <div className="search-books-input-wrapper">
