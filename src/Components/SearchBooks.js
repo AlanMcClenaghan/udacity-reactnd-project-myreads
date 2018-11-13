@@ -19,7 +19,7 @@ class SearchBooks extends Component {
 
   // Created Lifecycle Event to Search for books in the API
   componentDidMount() {
-    this.performSearch = debounce(1000, this.performSearch);
+    this.performSearch = debounce(250, this.performSearch);
   }
 
   updateQuery = (query) => {

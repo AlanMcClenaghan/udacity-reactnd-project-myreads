@@ -14,7 +14,7 @@ const BooksGrid = (props) => {
               <div
                 className="book-cover"
                 style={{
-                  width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})`
+                  width: 128, height: 193, backgroundImage: `url(${book.imageLinks ? book.imageLinks.smallThumbnail : 'no-image.png'})`
                 }}></div>
               <div className="book-shelf-changer">
                 <select
@@ -30,7 +30,11 @@ const BooksGrid = (props) => {
               </div>
             </div>
             <div className="book-title">{books.title}</div>
-            <div className="book-authors">{book.authors.join(', ')}</div>
+
+            <div className="book-authors">
+              {book.authors ? book.authors.join(', ')
+                : book.publisher ? book.publisher
+                  : book.publishedDate}</div>
           </div>
         </li>
       ))}
