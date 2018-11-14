@@ -34,7 +34,7 @@ class SearchBooks extends Component {
       .then(booksFound => {
         if (query) {
           this.setState({
-            booksFound,
+            booksFound
           })
         } else {
           this.setState({ booksFound: [] })
@@ -43,6 +43,13 @@ class SearchBooks extends Component {
   }
 
   render() {
+
+    const booksFound = this.state.booksFound
+    const booksOnShelves = this.props.books
+
+    const books = booksFound.map(bookFound => booksOnShelves.find(book => book.id === bookFound.id) || bookFound);
+
+    console.log(books)
 
     return (
       <div className="search-books" >
@@ -65,7 +72,7 @@ class SearchBooks extends Component {
 
           {this.state.booksFound.length > 0 ?
             <BooksGrid
-              books={this.state.booksFound}
+              books={books}
               changeBookShelf={this.props.changeBookShelf}
             />
             :

@@ -18,7 +18,7 @@ const BooksGrid = (props) => {
                 }}></div>
               <div className="book-shelf-changer">
                 <select
-                  value={book.shelf ? book.shelf : book.shelf = 'move'}
+                  value={book.shelf ? book.shelf : book.shelf = 'none'}
                   onChange={event => changeBookShelf(book, event.target.value)}
                 >
                   <option value="move" disabled>Move to...</option>

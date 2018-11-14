@@ -1,6 +1,8 @@
 import React from 'react'
 import * as BooksAPI from './BooksAPI'
-import './App.css'
+
+// Step 6 - Add navigation.
+import { Route } from 'react-router-dom'
 
 // Step 1 - Create components that hold data.
 import SearchBooks from './Components/SearchBooks'
@@ -8,8 +10,7 @@ import SearchBooks from './Components/SearchBooks'
 // Step 2 - Create components that need data.
 import ListBooks from './Components/ListBooks'
 
-// Step 6 - Add navigation.
-import { Route } from 'react-router-dom'
+import './App.css'
 
 class BooksApp extends React.Component {
   state = {
@@ -35,13 +36,12 @@ class BooksApp extends React.Component {
   handleChangeBookShelf = (book, shelf) => {
     BooksAPI.update(book, shelf)
       .then(() => {
+        book.shelf = shelf
         this.setState((prevState) => ({
-          book: prevState.books.filter(b => b.id !== book.id).concat([book])
+          book: prevState.books.filter(b => b.id !== book.id).concat(book)
         }))
-        this.getBooks()
       })
   }
-
 
   render() {
 
@@ -55,6 +55,7 @@ class BooksApp extends React.Component {
         )} />
         <Route path="/search" render={() => (
           <SearchBooks
+            books={this.state.books}
             changeBookShelf={this.handleChangeBookShelf}
           />
         )} />
