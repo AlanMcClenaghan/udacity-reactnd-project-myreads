@@ -53,11 +53,6 @@ class SearchBooks extends Component {
       books = booksFound.map(bookFound => booksOnShelves.find(book => book.id === bookFound.id) || bookFound);
     }
 
-    console.log(booksFound)
-    console.log(booksOnShelves)
-    console.log(books)
-
-
     return (
       <div className="search-books" >
         <div className="search-books-bar">
