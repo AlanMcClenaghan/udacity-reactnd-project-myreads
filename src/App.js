@@ -40,6 +40,7 @@ class BooksApp extends React.Component {
         this.setState((prevState) => ({
           book: prevState.books.filter(b => b.id !== book.id).concat(book)
         }))
+        this.getBooks()
       })
   }
 
